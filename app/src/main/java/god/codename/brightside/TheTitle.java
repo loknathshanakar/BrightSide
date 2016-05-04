@@ -1,24 +1,25 @@
 package god.codename.brightside;
 
-import android.content.Context;
+
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
-public class BlankFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class TheTitle extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "TabNumber";
@@ -30,27 +31,20 @@ public class BlankFragment extends Fragment {
 
     TextView tv;
     GridView newsView;
-    public BlankFragment() {
+
+    public TheTitle() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BlankFragment newInstance(int param1, String param2) {
-        BlankFragment fragment = new BlankFragment();
+    public static TheTitle newInstance(int param1, String param2) {
+        TheTitle fragment = new TheTitle();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +59,8 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rv=inflater.inflate(R.layout.fragment_blank, container, false);
+        View rv=inflater.inflate(R.layout.fragment_the_title, container, false);
+
         newsView=(GridView)rv.findViewById(R.id.newsView) ;
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             newsView.setNumColumns(4);
@@ -86,16 +81,18 @@ public class BlankFragment extends Fragment {
             newsView.setBackgroundColor(getResources().getColor(R.color.tab5_color));
         CustomAdapter customAdapter = new CustomAdapter(getContext(), getListItemData());
         newsView.setAdapter(customAdapter);
-        return rv;
-    }
 
+        return (rv);
+    }
     private List<ItemObject> getListItemData(){
         List<ItemObject> listViewItems = new ArrayList<>();
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
         for(int i=0;i<100;i++) {
-            listViewItems.add(new ItemObject("NA","NA","NA","NA"));
+                listViewItems.add(new ItemObject("Title 1",formattedDate,"The Title","NULL"));
         }
 
         return listViewItems;
     }
-
 }

@@ -1,25 +1,19 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="god.codename.brightside.BlankFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
-
+    tools:context="god.codename.brightside.TheTitle">
 
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newsView"
         android:numColumns="auto_fit"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:gravity="top"
         android:background="@color/color_squish_gray"
         android:padding="@dimen/three_dp"
         android:horizontalSpacing="@dimen/three_dp"
         android:verticalSpacing="@dimen/three_dp"
         android:scrollbars="vertical"/>
-</RelativeLayout>
+
+</FrameLayout>

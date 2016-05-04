@@ -1,5 +1,6 @@
 package god.codename.brightside;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,10 +25,14 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
-public class Main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static int TAB_COUNT=8;
+    ViewPager mPager=null;
+    SmartTabLayout viewPagerTab=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +44,64 @@ public class Main extends AppCompatActivity
         /**VIEWPAGER**/
         MyAdapter mAdapter = new MyAdapter(getSupportFragmentManager());
 
-        ViewPager mPager = (ViewPager) findViewById(R.id.viewpager);
+        mPager = (ViewPager) findViewById(R.id.viewpager);
         mPager.setAdapter(mAdapter);
 
 
-        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         viewPagerTab.setViewPager(mPager);
+
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if(position==0) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab1_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab1_color)));
+                }
+                if(position==1) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab2_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab2_color)));
+                }
+                if(position==2) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab3_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab3_color)));
+                }
+                if(position==3) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab4_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab4_color)));
+                }
+                if(position==4) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab5_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab5_color)));
+                }
+                if(position==5) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab1_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab1_color)));
+                }
+                if(position==6) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab2_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab2_color)));
+                }
+                if(position==7) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab3_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab3_color)));
+                }
+                if(position==8) {
+                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab4_color));
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab4_color)));
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+
+            }
+        });
         /**END**/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -55,7 +114,6 @@ public class Main extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-
     public static class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -63,26 +121,49 @@ public class Main extends AppCompatActivity
 
         @Override
         public int getCount() {
-            return 2;
+            return TAB_COUNT;
         }
 
         @Override
         public Fragment getItem(int position) {
 
             if (position == 0) {
-                return BlankFragment.newInstance("1", "2");
-            } else {
-                return BlankFragment.newInstance("2", "2");
+                return TheTitle.newInstance(1, "2");
+            } else if (position == 1) {
+                return BlankFragment.newInstance(2, "2");
+            } else if (position == 2) {
+                return BlankFragment.newInstance(3, "2");
+            } else if (position == 3) {
+                return BlankFragment.newInstance(4, "2");
+            } else if (position == 4) {
+                return BlankFragment.newInstance(5, "2");
+            }else if (position == 5) {
+                return BlankFragment.newInstance(6, "2");
+            }else if (position == 6) {
+                return BlankFragment.newInstance(7, "2");
+            }else {
+                return BlankFragment.newInstance(8, "2");
             }
-
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if(position==1)
-                return ("Tab 1");
+            if(position==0)
+                return ("The Daily");
+            else if(position==1)
+                return ("Computing");
+            else if(position==2)
+                return ("Mobile");
+            else if(position==3)
+                return ("Robotics");
+            else if(position==4)
+                return ("Business");
+            else if(position==5)
+                return ("Business");
+            else if(position==6)
+                return("Bio Medicine");
             else
-                return ("Tab 2");
+                return("Energy");
         }
     }
     @Override

@@ -5,4 +5,18 @@
     <color name="colorAccent">#FF4081</color>
     <color name="transparent">#00000000</color>
     <color name="black_20">#33000000</color>
+    <color name="basegray">#33000000</color>
+    <color name="white">#FFFFFF</color>
+
+
+
+    <color name="tab1_color">#f06292</color>
+    <color name="tab2_color">#009688</color>
+    <color name="tab3_color">#00bcd4</color>
+    <color name="tab4_color">#ab47bc</color>
+    <color name="tab5_color">#607D8B</color>
+
+
+    <color name="color_squish_gray">#EFEFEB</color>
+    <color name="dark_gray">#607D8B</color>
 </resources>

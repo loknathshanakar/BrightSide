@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newsImage"
+        android:scaleType="centerInside"
+        android:background="@color/color_squish_gray"
+        android:adjustViewBounds="true"
+        android:src="@drawable/tech_placeholder" />
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/fav_icon_margin"
+        android:layout_marginRight="@dimen/fav_icon_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookmark"
+        android:src="@drawable/book_mark"
+        android:layout_alignTop="@+id/newsImage"
+        android:layout_alignRight="@+id/newsImage"
+        android:layout_alignEnd="@+id/newsImage" />
+
+    <RelativeLayout
+        android:layout_below="@+id/newsImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:id="@+id/relativeLayout"
+        android:layout_alignRight="@+id/newsImage"
+        android:layout_alignEnd="@+id/newsImage">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:singleLine="true"
+            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginStart="@dimen/five_dp"
+            android:id="@+id/category" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:singleLine="true"
+            android:layout_below="@+id/category"
+            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginBottom="@dimen/five_dp"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginStart="@dimen/five_dp"
+            android:id="@+id/title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:singleLine="true"
+            android:id="@+id/date"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_alignTop="@+id/category"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+</RelativeLayout>
