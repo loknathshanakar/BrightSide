@@ -1,100 +1,102 @@
 package god.codename.brightside;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static int TAB_COUNT=8;
+    /** AdapterArrays for each fragment**/
+    public static ArrayList <BasicModel> TheTitleAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> ComutingAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> InternetAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> MobileAndGearAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> BusinessAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> SecurityAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> RoboticsAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> CultureAndDesignAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> ScienceAndBioAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> EnergyAndTransportAdapterArray =new ArrayList<>();
+    public static ArrayList <BasicModel> FavAdapterArray =new ArrayList<>();
+
+    public static int TAB_COUNT=10;
+    public static String NextCallLink="NULL";
     ViewPager mPager=null;
     SmartTabLayout viewPagerTab=null;
+    Window window=null;
+    public static ArrayList <String>TabNames=new ArrayList<>();
+    public static boolean RedrawAdapter=false;
+    Context context;
+    public static MyAdapter ViewPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context=this;
+        db=new DBHelper(context);
+        TabNames.add("The Daily");
+        TabNames.add("Computing");
+        TabNames.add("Internet");
+        TabNames.add("Mobile & Gear");
+        TabNames.add("Business");
+        TabNames.add("Security");
+        TabNames.add("Robotics");
+        TabNames.add("Culture & Design");
+        TabNames.add("Science & Biomedicine");
+        TabNames.add("Energy & Transport");
+        TabNames.add("Null");
 
-
+        /**SOme aAction Bar Setup**/
+        getSupportActionBar().setTitle("News & Reviews");
         /**VIEWPAGER**/
-        MyAdapter mAdapter = new MyAdapter(getSupportFragmentManager());
+        ViewPagerAdapter = new MyAdapter(getSupportFragmentManager());
 
         mPager = (ViewPager) findViewById(R.id.viewpager);
-        mPager.setAdapter(mAdapter);
-
+        mPager.setAdapter(ViewPagerAdapter);
+        mPager.setOffscreenPageLimit(5);
 
         viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         viewPagerTab.setViewPager(mPager);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
+        SetTabAndStatusBarColors(0,window);
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                if(position==0) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab1_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab1_color)));
-                }
-                if(position==1) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab2_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab2_color)));
-                }
-                if(position==2) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab3_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab3_color)));
-                }
-                if(position==3) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab4_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab4_color)));
-                }
-                if(position==4) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab5_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab5_color)));
-                }
-                if(position==5) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab1_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab1_color)));
-                }
-                if(position==6) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab2_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab2_color)));
-                }
-                if(position==7) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab3_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab3_color)));
-                }
-                if(position==8) {
-                    viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab4_color));
-                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab4_color)));
+                SetTabAndStatusBarColors(position,window);
+                if(RedrawAdapter) {
+                    ViewPagerAdapter.notifyDataSetChanged();
+                    RedrawAdapter=false;
                 }
             }
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-
             }
 
             @Override
@@ -114,11 +116,85 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    DBHelper db;
+    CorePattern GetDetails=new CorePattern();
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        Main.NextCallLink = GetDetails.GetNextCallLink(HouseKeeping.ReflectionFile);
+    }
+    public void SetTabAndStatusBarColors(int position,Window window){
+        if(position==0) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab1_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab1_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab1_color));
+        }
+        if(position==1) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab2_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab2_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab2_color));
+        }
+        if(position==2) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab3_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab3_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab3_color));
+        }
+        if(position==3) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab4_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab4_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab4_color));
+        }
+        if(position==4) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab5_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab5_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab5_color));
+        }
+        if(position==5) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab1_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab1_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab1_color));
+        }
+        if(position==6) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab2_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab2_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab2_color));
+        }
+        if(position==7) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab3_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab3_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab3_color));
+        }
+        if(position==8) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab4_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab4_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab4_color));
+        }
+        if(position==9) {
+            viewPagerTab.setBackgroundColor(getResources().getColor(R.color.tab5_color));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.tab5_color)));
+            if(window!=null)
+                window.setStatusBarColor(getResources().getColor(R.color.tab5_color));
+        }
+    }
+
     public static class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }
 
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
         @Override
         public int getCount() {
             return TAB_COUNT;
@@ -128,44 +204,35 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         public Fragment getItem(int position) {
 
             if (position == 0) {
-                return TheTitle.newInstance(1, "2");
+                return TheTitleFragment.newInstance(position+1, TabNames.get(position));
             } else if (position == 1) {
-                return BlankFragment.newInstance(2, "2");
+                return ComputingFragment.newInstance(position+1, TabNames.get(position));
             } else if (position == 2) {
-                return BlankFragment.newInstance(3, "2");
+                return InternetFragment.newInstance(position+1, TabNames.get(position));
             } else if (position == 3) {
-                return BlankFragment.newInstance(4, "2");
+                return MobileAndGearFragment.newInstance(position+1, TabNames.get(position));
             } else if (position == 4) {
-                return BlankFragment.newInstance(5, "2");
+                return BusinessFragment.newInstance(position+1, TabNames.get(position));
             }else if (position == 5) {
-                return BlankFragment.newInstance(6, "2");
+                return SecurityFragment.newInstance(position+1, TabNames.get(position));
             }else if (position == 6) {
-                return BlankFragment.newInstance(7, "2");
-            }else {
-                return BlankFragment.newInstance(8, "2");
-            }
+                return RoboticsFragment.newInstance(position+1, TabNames.get(position));
+            }else if (position == 7) {
+                return CultureAndDesignFragment.newInstance(position+1, TabNames.get(position));
+            }else if (position == 8) {
+                return ScienceAndBioMedicineFragment.newInstance(position+1, TabNames.get(position));
+            }else if (position == 9) {
+                return EnergyAndTransportFragment.newInstance(position+1, TabNames.get(position));
+            }else
+                return BlankFragment.newInstance(10, TabNames.get(position));
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if(position==0)
-                return ("The Daily");
-            else if(position==1)
-                return ("Computing");
-            else if(position==2)
-                return ("Mobile");
-            else if(position==3)
-                return ("Robotics");
-            else if(position==4)
-                return ("Business");
-            else if(position==5)
-                return ("Business");
-            else if(position==6)
-                return("Bio Medicine");
-            else
-                return("Energy");
+            return (TabNames.get(position));
         }
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -188,14 +255,19 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.action_brightness:
+                return (new BrightnessHandler().BrightnessHandler(context, this));
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.open_fav:
+                Intent i=new Intent(Main.this,av.class);
+                startActivity(i);
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

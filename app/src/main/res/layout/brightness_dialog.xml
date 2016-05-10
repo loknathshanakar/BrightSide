@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/tab1_color">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Brightness Control"
+        android:gravity="center"
+        android:id="@+id/textView"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_below="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_brightness_min"
+        android:id="@+id/minBrightness"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/three_dp"
+        android:paddingStart="@dimen/three_dp"
+        android:paddingRight="@dimen/three_dp"
+        android:paddingEnd="@dimen/three_dp"
+        />
+
+    <ImageView
+        android:layout_below="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_action_brightness"
+        android:id="@+id/brightness"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/three_dp"
+        android:paddingStart="@dimen/three_dp"
+        android:paddingRight="@dimen/three_dp"
+        android:paddingEnd="@dimen/three_dp"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_brightness_max"
+        android:id="@+id/brightnessMax"
+        android:paddingLeft="@dimen/three_dp"
+        android:paddingStart="@dimen/three_dp"
+        android:paddingRight="@dimen/three_dp"
+        android:paddingEnd="@dimen/three_dp"
+        android:layout_above="@+id/seekBar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/minBrightness"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+</RelativeLayout>

@@ -1,13 +1,8 @@
 package god.codename.brightside;
 
-import android.content.Context;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,19 +75,19 @@ public class BlankFragment extends Fragment {
             newsView.setBackgroundColor(getResources().getColor(R.color.tab2_color));
         if(TabNumber == 3 || TabNumber == 8)
             newsView.setBackgroundColor(getResources().getColor(R.color.tab3_color));
-        if(TabNumber == 4)
+        if(TabNumber == 4 || TabNumber == 9)
             newsView.setBackgroundColor(getResources().getColor(R.color.tab4_color));
         if(TabNumber == 5)
             newsView.setBackgroundColor(getResources().getColor(R.color.tab5_color));
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), getListItemData());
-        newsView.setAdapter(customAdapter);
+        //CustomAdapter customAdapter = new CustomAdapter(getContext(), getListItemData());
+        //newsView.setAdapter(customAdapter);
         return rv;
     }
 
-    private List<ItemObject> getListItemData(){
-        List<ItemObject> listViewItems = new ArrayList<>();
+    private List<BasicModel> getListItemData(){
+        List<BasicModel> listViewItems = new ArrayList<>();
         for(int i=0;i<100;i++) {
-            listViewItems.add(new ItemObject("NA","NA","NA","NA"));
+            listViewItems.add(new BasicModel("NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","false"));
         }
 
         return listViewItems;

@@ -1,11 +1,36 @@
 <resources>
-    <string name="app_name">BrightSide</string>
+    <string name="app_name">Science &amp; Tech News</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
 
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_house_keeping">HouseKeeping</string>
+    <string name="load_more_news">More Chips...</string>
+
+    <string name="load_the_title">More Daily News</string>
+    <string name="load_computing">More Of Computing News</string>
+    <string name="load_internet">More Of Internet</string>
+    <string name="load_mobile">More Of Mobile&amp;Gear</string>
+    <string name="laod_business">More Of Business</string>
+    <string name="laod_security">More Of Security</string>
+    <string name="load_robot">More Of Robotics</string>
+    <string name="load_culture">More Of Culture &amp; Design</string>
+    <string name="load_science">More Of Science &amp; Biomedical</string>
+    <string name="load_energy">More Of Energy &amp; Transport</string>
+
+    <string name="brightness_control">Brightness Control</string>
+    <string name="open_fav">Open Favorites</string>
+    <string name="settings">Settings</string>
+    <string name="title_activity_av">av</string>
+
+    <string name="no_favs">You Havent Marked Any Favorites</string>
+    <string name="title_activity_display_news">DisplayNews</string>
+
+
+    <string name="disclaimer">all articles  displayed here are copyrighted and belong to their respective owners</string>
 </resources>

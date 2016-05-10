@@ -7,19 +7,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import in.srain.cube.views.GridViewWithHeaderAndFooter;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TheTitle extends Fragment {
+public class ReviewsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "TabNumber";
@@ -30,14 +33,14 @@ public class TheTitle extends Fragment {
     private String mParam2;
 
     TextView tv;
-    GridView newsView;
+    GridViewWithHeaderAndFooter newsView;
 
-    public TheTitle() {
+    public ReviewsFragment() {
         // Required empty public constructor
     }
 
-    public static TheTitle newInstance(int param1, String param2) {
-        TheTitle fragment = new TheTitle();
+    public static ReviewsFragment newInstance(int param1, String param2) {
+        ReviewsFragment fragment = new ReviewsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,7 +64,10 @@ public class TheTitle extends Fragment {
         // Inflate the layout for this fragment
         View rv=inflater.inflate(R.layout.fragment_the_title, container, false);
 
-        newsView=(GridView)rv.findViewById(R.id.newsView) ;
+        newsView=(GridViewWithHeaderAndFooter)rv.findViewById(R.id.newsView) ;
+        LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+        View footerView = layoutInflater.inflate(R.layout.grid_footer, null);
+        newsView.addFooterView(footerView);
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             newsView.setNumColumns(4);
         }
@@ -79,18 +85,26 @@ public class TheTitle extends Fragment {
             newsView.setBackgroundColor(getResources().getColor(R.color.tab4_color));
         if(TabNumber == 5)
             newsView.setBackgroundColor(getResources().getColor(R.color.tab5_color));
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), getListItemData());
-        newsView.setAdapter(customAdapter);
+        //CustomAdapter customAdapter = new CustomAdapter(getContext(), getListItemData());
+        //newsView.setAdapter(customAdapter);
 
+
+        newsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Toast.makeText(getContext(),"Position "+position,Toast.LENGTH_LONG).show();
+            }
+        });
         return (rv);
     }
-    private List<ItemObject> getListItemData(){
-        List<ItemObject> listViewItems = new ArrayList<>();
+    private List<BasicModel> getListItemData(){
+        List<BasicModel> listViewItems = new ArrayList<>();
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(c.getTime());
-        for(int i=0;i<100;i++) {
-                listViewItems.add(new ItemObject("Title 1",formattedDate,"The Title","NULL"));
+        for(int i=0;i<10;i++) {
+                //listViewItems.add(new BasicModel("Title 1",formattedDate,"The Title","NULL","NULL","NULL","NULL","NULL","NULL",false));
         }
 
         return listViewItems;

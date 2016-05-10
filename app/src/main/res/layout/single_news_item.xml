@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="top">
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/newsImage"
         android:scaleType="centerInside"
         android:background="@color/color_squish_gray"
         android:adjustViewBounds="true"
-        android:src="@drawable/tech_placeholder" />
+        android:src="@drawable/tech_placeholder" />-->
+
+    <god.codename.brightside.SquareImageView
+        android:id="@+id/newsImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="@null"
+        android:src="@drawable/tech_placeholder"
+        android:background="@color/color_squish_gray"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"/>
 
 
     <ImageView
@@ -19,24 +31,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bookmark"
-        android:src="@drawable/book_mark"
+        android:src="@drawable/ic_action_bookmark_unfilled"
         android:layout_alignTop="@+id/newsImage"
         android:layout_alignRight="@+id/newsImage"
-        android:layout_alignEnd="@+id/newsImage" />
+        android:layout_alignEnd="@+id/newsImage"
+        android:onClick="BookMarkHandler"
+        android:alpha=".80"/>
 
     <RelativeLayout
         android:layout_below="@+id/newsImage"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:id="@+id/relativeLayout"
+        android:layout_alignLeft="@+id/newsImage"
+        android:layout_alignStart="@+id/newsImage"
         android:layout_alignRight="@+id/newsImage"
         android:layout_alignEnd="@+id/newsImage">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Medium Text"
+            android:textStyle="bold"
             android:singleLine="true"
             android:layout_marginTop="@dimen/five_dp"
             android:layout_marginLeft="@dimen/five_dp"
@@ -47,14 +64,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:singleLine="true"
+            android:text="Title"
             android:layout_below="@+id/category"
             android:layout_marginTop="@dimen/five_dp"
             android:layout_marginBottom="@dimen/five_dp"
-            android:layout_marginLeft="@dimen/five_dp"
-            android:layout_marginStart="@dimen/five_dp"
-            android:id="@+id/title" />
+            android:maxLines="2"
+            android:minLines="2"
+            android:ellipsize="end"
+            android:id="@+id/title"
+            android:layout_alignRight="@+id/date"
+            android:layout_alignEnd="@+id/date"
+            android:layout_alignLeft="@+id/category"
+            android:layout_alignStart="@+id/category" />
 
         <TextView
             android:layout_width="wrap_content"
