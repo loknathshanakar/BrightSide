@@ -3,11 +3,16 @@ package god.codename.brightside;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 
 /**
@@ -30,6 +35,10 @@ public class QuickView extends Fragment {
     private String FullText;
     private String ImageURL;
     private String NewsURL;
+    private String Image_1_Desc;
+    private float FontSize=0;
+
+    public int NumberOfImages=0,NumberOfImageSubDesc=0;
 
     public QuickView() {
         // Required empty public constructor
@@ -89,6 +98,10 @@ public class QuickView extends Fragment {
         ImageView_3=(ImageView)rv.findViewById(R.id.image3);
         /**END**/
 
+        /**Set font sizes**/
+        FontSize=new SharedPreferenceRW().SharedPrefrenceReaderFloat(SharedPreferenceRW.FONTSIZE,18f,getContext());
+        Content_2_TextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,FontSize);
+        /**END**/
         /**Set all know contents**/
         SourceTextView.setText(Source);
         TitleTextView.setText(Title);
@@ -98,7 +111,76 @@ public class QuickView extends Fragment {
         AuthorTextView.setText(Author);
         Disclaimer_TextView.setText(R.string.disclaimer);
         /**END**/
+
+        /**Get and set unknown contents**/
+        String s=FullText;
+        try {
+            Image_1_Desc = s.substring(s.indexOf("<imagedescx>") + "<imagedescx>".length(), s.indexOf("</imagedescx>"));
+        }catch (IndexOutOfBoundsException e){/***/}
+        FullText=FullText.replace("<imagedescx>"+Image_1_Desc+"</imagedescx>","");
+        Glide.with(getActivity()).load(ImageURL).diskCacheStrategy(DiskCacheStrategy.ALL).into(ImageView_1);
+        Image_1_Desc_TextView.setText(Image_1_Desc);
+        Content_2_TextView.setText(Html.fromHtml(FullText.replace("$$$$","\r\n")));
+
         return(rv);
     }
 
+    public int GetNumberOfImages(String fullText){
+        //TODO:i made single image and full text for now
+        int NoOfImages=0;
+        int LastPosition=0;
+        for(int i=0;i<=4;i++){
+            if(FullText.indexOf("%%%%",LastPosition)>LastPosition){
+                LastPosition=LastPosition+4;
+                NoOfImages++;
+            }
+        }
+        return (NoOfImages);
+    }
+
+    public int GetNumberOfImageSubDesc(String fullText){
+        int NoOfImagesDesc=0;
+        int LastPosition=0;
+        for(int i=0;i<=4;i++){
+            if(FullText.indexOf("@@@@@",LastPosition)>LastPosition){
+                LastPosition=LastPosition+4;
+                NoOfImagesDesc++;
+            }
+        }
+        return (NoOfImagesDesc/2);
+    }
+
+    public void DisableImageViews(int numbers){
+        if(numbers==0)
+            return;
+        if(numbers==1){
+            ImageView_3.setVisibility(View.GONE);
+        }
+        if(numbers==2){
+            ImageView_3.setVisibility(View.GONE);
+            ImageView_2.setVisibility(View.GONE);
+        }
+        if(numbers==3){
+            ImageView_3.setVisibility(View.GONE);
+            ImageView_2.setVisibility(View.GONE);
+            ImageView_1.setVisibility(View.GONE);
+        }
+    }
+
+    public void DisableImageViewDesc(int numbers){
+        if(numbers==0)
+            return;
+        if(numbers==1){
+            Image_3_Desc_TextView.setVisibility(View.GONE);
+        }
+        if(numbers==2){
+            Image_3_Desc_TextView.setVisibility(View.GONE);
+            Image_2_Desc_TextView.setVisibility(View.GONE);
+        }
+        if(numbers==3){
+            Image_3_Desc_TextView.setVisibility(View.GONE);
+            Image_2_Desc_TextView.setVisibility(View.GONE);
+            Image_1_Desc_TextView.setVisibility(View.GONE);
+        }
+    }
 }

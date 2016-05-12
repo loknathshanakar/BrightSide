@@ -3,7 +3,8 @@
 
 <ScrollView android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_id">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -94,6 +95,7 @@
                 android:layout_alignEnd="@+id/source"/>
 
             <TextView
+                android:visibility="gone"
                 android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,17 +115,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/partContent1"
                 android:layout_centerHorizontal="true"
-                android:layout_alignLeft="@+id/source"
-                android:layout_alignStart="@+id/source"
-                android:layout_alignRight="@+id/source"
-                android:layout_alignEnd="@+id/source"
-                android:layout_marginTop="@dimen/fifteen_dp"
-                android:layout_marginBottom="@dimen/three_dp"
+                android:layout_margin="@dimen/fifteen_dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/tech_placeholder" />
 
             <TextView
+                android:gravity="center"
+                android:layout_marginTop="-10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image1"
@@ -151,22 +150,20 @@
                 android:layout_alignEnd="@+id/source" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/image2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/partContent2"
                 android:layout_centerHorizontal="true"
-                android:layout_alignLeft="@+id/source"
-                android:layout_alignStart="@+id/source"
-                android:layout_alignRight="@+id/source"
-                android:layout_alignEnd="@+id/source"
-                android:layout_marginTop="@dimen/fifteen_dp"
-                android:layout_marginBottom="@dimen/three_dp"
+                android:layout_margin="@dimen/fifteen_dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/tech_placeholder" />
 
             <TextView
+                android:visibility="gone"
+                android:layout_marginTop="-10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image2"
@@ -180,6 +177,7 @@
                 android:layout_alignEnd="@+id/source" />
 
             <TextView
+                android:visibility="gone"
                 android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -194,22 +192,20 @@
                 android:layout_alignEnd="@+id/source" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/image3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/partContent3"
                 android:layout_centerHorizontal="true"
-                android:layout_alignLeft="@+id/source"
-                android:layout_alignStart="@+id/source"
-                android:layout_alignRight="@+id/source"
-                android:layout_alignEnd="@+id/source"
-                android:layout_marginTop="@dimen/fifteen_dp"
-                android:layout_marginBottom="@dimen/three_dp"
+                android:layout_margin="@dimen/fifteen_dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/tech_placeholder" />
 
             <TextView
+                android:visibility="gone"
+                android:layout_marginTop="-10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image3"
@@ -223,6 +219,7 @@
                 android:layout_alignEnd="@+id/source" />
 
             <TextView
+                android:visibility="gone"
                 android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -237,6 +234,7 @@
                 android:layout_alignEnd="@+id/source" />
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/partContent4"

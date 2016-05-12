@@ -29,12 +29,10 @@ import in.srain.cube.views.GridViewWithHeaderAndFooter;
  * A simple {@link Fragment} subclass.
  */
 public class TheTitleFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "TabNumber";
     private static final String ARG_PARAM2 = "TabName";
 
-    // TODO: Rename and change types of parameters
     private int TabNumber;
     private String TabName;
 
@@ -113,7 +111,7 @@ public class TheTitleFragment extends Fragment {
         newsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                new ShareDialogViewer().ShowShareDialog(getContext());
+                new ShareDialogViewer().ShowShareDialog(getActivity(),getContext(),Main.TheTitleAdapterArray.get(position).getNewsLink(),Main.TheTitleAdapterArray.get(position).getTitle(),"shared Via Science & Tech News","#S&T");
                 return (true);
             }
         });

@@ -10,17 +10,60 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".HouseKeeping"
-    tools:showIn="@layout/activity_house_keeping">
-<ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    tools:showIn="@layout/activity_house_keeping"
+    android:background="@color/nav_drawer_color">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/app_logo"
+        android:layout_above="@+id/appname"
+        android:layout_centerHorizontal="true" />
+
     <TextView
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-</ScrollView>
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="@string/app_name_with_version"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/appname" />
+
+
+    <TextView
+        android:layout_below="@+id/appname"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textStyle="bold|italic"
+        android:layout_alignRight="@+id/appname"
+        android:layout_alignEnd="@+id/appname"
+        android:text="@string/tagline" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/ten_dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:id="@+id/serverresults"
+        android:gravity="center"
+        android:layout_below="@+id/progressBar" />
+
+
 </RelativeLayout>

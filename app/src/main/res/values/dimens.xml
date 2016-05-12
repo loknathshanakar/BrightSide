@@ -10,7 +10,8 @@
     <dimen name="tab_height">48dp</dimen>
     <dimen name="tab_height_large">72dp</dimen>
 
-
+    <dimen name="space_between_views">10dp</dimen>
+    <dimen name="nav_drawer_header">15sp</dimen>
     <dimen name="ten_dp">10dp</dimen>
     <dimen name="twenty">20dp</dimen>
     <dimen name="fifteen_dp">15dp</dimen>
@@ -19,6 +20,8 @@
     <dimen name="five_dp">5dp</dimen>
     <dimen name="one">1dp</dimen>
     <dimen name="fav_icon_margin">14dp</dimen>
+    <dimen name="twenty_four">24dp</dimen>
+    <dimen name="nav_drawer_icon_dim">34dp</dimen>
     stl_defaultTabTextHorizontalPadding
     <dimen name="stl_defaultTabTextHorizontalPadding">13dp</dimen>
 </resources>

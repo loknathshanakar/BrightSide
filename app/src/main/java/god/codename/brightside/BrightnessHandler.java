@@ -34,12 +34,10 @@ public class BrightnessHandler {
         sk.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
 
             @Override
@@ -56,5 +54,15 @@ public class BrightnessHandler {
             }
         });
         return true;
+    }
+
+    public void RestoreBrightNess(Context context,Activity activity){
+        /**RESTORE BRIGHTNESS**/
+            float arg1=new SharedPreferenceRW().SharedPrefrenceReaderFloat(SharedPreferenceRW.SLIDERCURRENT,250,context);
+            float BackLightValue = arg1/100;
+            WindowManager.LayoutParams layoutParams = activity.getWindow().getAttributes(); // Get Params
+            layoutParams.screenBrightness = BackLightValue; // Set Value
+            activity.getWindow().setAttributes(layoutParams); // Set params
+        /**END**/
     }
 }

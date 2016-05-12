@@ -5,16 +5,11 @@
     android:background="@color/transparent">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/load_more_news"
         android:id="@+id/loadMore"
         android:textStyle="bold"
-        android:drawableLeft="@mipmap/ic_action_laptop"
-        android:drawablePadding="@dimen/three_dp"
-        android:drawableStart="@mipmap/ic_action_laptop"
-        android:drawableRight="@mipmap/ic_action_mobile"
-        android:drawableEnd="@mipmap/ic_action_mobile"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white"
         android:background="@color/transparent"

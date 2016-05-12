@@ -13,6 +13,7 @@ public class SharedPreferenceRW {
     public static String TOKEN = "TOKEN" ;        //Token helps me to to identify whether data in sabercat has changed or not
     public static String MAXNEWSITEMCOUNT = "MAXNEWSITEMCOUNT" ;
     public static String SLIDERCURRENT="SLIDERCURRENT";
+    public static String FONTSIZE="FONTSIZE";
     /**Universal Sharedprederence writer**/
     public void SharedPreferenceWriter(String Key,String Data,Context context){
         SharedPreferences sharedpreferences = context.getSharedPreferences(APPKEYS, Context.MODE_PRIVATE);
@@ -37,11 +38,11 @@ public class SharedPreferenceRW {
         editor.apply();
     }
 
-    public float SharedPrefrenceReaderFloat(String Key,int Default,Context context){
+    public float SharedPrefrenceReaderFloat(String Key,float Default,Context context){
         SharedPreferences sharedpreferences = context.getSharedPreferences(APPKEYS, Context.MODE_PRIVATE);
         return (sharedpreferences.getFloat(Key,Default));
     }
-    public void SharedPreferenceWriterFloat(String Key,int Data,Context context){
+    public void SharedPreferenceWriterFloat(String Key,float Data,Context context){
         SharedPreferences sharedpreferences = context.getSharedPreferences(APPKEYS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putFloat(Key,Data);

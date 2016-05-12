@@ -4,15 +4,22 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 public class DisplayNews extends AppCompatActivity {
@@ -31,7 +38,7 @@ public class DisplayNews extends AppCompatActivity {
     public static String ImageURL;
     public static String NewsURL;
 
-
+//TODO:Back on action bar not working
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,8 @@ public class DisplayNews extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("View News");
+        viewGroup=findViewById(android.R.id.content);
+        context=this;
         /**Get passed parameters**/
         Bundle extras = getIntent().getExtras();
         Source=extras.getString(QuickView.SOURCE,"NULL");
@@ -82,7 +91,74 @@ public class DisplayNews extends AppCompatActivity {
 
     }
 
+    Tracker mTracker;
+    @Override
+    public void onResume() {
+        super.onResume();
+        /**Track Application**/
+        AnalyticsApplication application_new = (AnalyticsApplication) getApplication();
+        mTracker = application_new.getDefaultTracker();
+        mTracker.setScreenName("Read news screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        /**Reset Long Clicker**/
 
+        new BrightnessHandler().RestoreBrightNess(context,DisplayNews.this);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finish();
+            return(true);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_display_news, menu);
+        return true;
+    }
+
+    View viewGroup;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        float FontSize;
+        switch (item.getItemId()) {
+            case R.id.action_brightness:
+                return (new BrightnessHandler().BrightnessHandler(context, this));
+
+            case R.id.settings:
+                Snackbar snackbar = Snackbar.make(viewGroup, "Settings coming soon!!", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                break;
+            case R.id.font_down:
+                if(mPager.getCurrentItem()==0) {
+                    FontSize = new SharedPreferenceRW().SharedPrefrenceReaderFloat(SharedPreferenceRW.FONTSIZE, 18f, context);
+                    new SharedPreferenceRW().SharedPreferenceWriterFloat(SharedPreferenceRW.FONTSIZE, FontSize - 1, context);
+                    ViewPagerAdapter = new MyAdapter(getSupportFragmentManager());
+                    mPager.setAdapter(ViewPagerAdapter);
+                }
+                break;
+
+            case R.id.font_up:
+                if(mPager.getCurrentItem()==0) {
+                    FontSize = new SharedPreferenceRW().SharedPrefrenceReaderFloat(SharedPreferenceRW.FONTSIZE, 18f, context);
+                    new SharedPreferenceRW().SharedPreferenceWriterFloat(SharedPreferenceRW.FONTSIZE, FontSize + 1, context);
+                    ViewPagerAdapter = new MyAdapter(getSupportFragmentManager());
+                    mPager.setAdapter(ViewPagerAdapter);
+                }
+                break;
+            case android.R.id.home:
+                finish();
+                return(true);
+        default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+        return (true);
+    }
     public static class MyAdapter extends FragmentStatePagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);

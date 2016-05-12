@@ -14,9 +14,12 @@ public class CODES {
     public static int HTTP_STATUS=-102;
     public static int UNSUPPORTED_MIME=-103;
     public static int IO_EXP=-104;
+    public static int OK=200;
 
+
+    public static int INVALID_TOKEN=-105;
     public static String ResponseCode(int CODE){
-        String returnString="HEALTH_OK";
+        String returnString="Unknown Code";
         /**
          Code -1:Nothing
          **/
@@ -44,6 +47,13 @@ public class CODES {
             returnString="Invalid URL";
         if(CODE == UNSUPPORTED_MIME)
             returnString="Error while downloading news...(MIME)";
+
+        if(CODE == OK)
+            returnString="OK";
+
+        if(CODE == INVALID_TOKEN)
+            returnString="INVALID TOKEN";
+
         return (returnString);
     }
 }

@@ -7,7 +7,7 @@
     <color name="black_20">#33000000</color>
     <color name="basegray">#33000000</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="nav_drawer_color">#262F3E</color>
 
 
     <color name="tab1_color">#009F5E</color>
@@ -16,7 +16,7 @@
     <color name="tab4_color">#1F849F</color>
     <color name="tab5_color">#AB47BC</color>
 
-
+    <color name="nav_drawer_parent_text_color">#EBC45F</color>
     <color name="color_squish_gray">#EFEFEB</color>
     <color name="dark_gray">#607D8B</color>
 </resources>

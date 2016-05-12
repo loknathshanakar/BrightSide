@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 
 import in.srain.cube.views.GridViewWithHeaderAndFooter;
 
-public class av extends AppCompatActivity {
+public class FavoritesActivity extends AppCompatActivity {
 
     Context context;
     GridViewWithHeaderAndFooter newsView;
@@ -34,7 +35,7 @@ public class av extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Favorites");
-
+        viewGroup = findViewById(android.R.id.content);
         /**Adapter get stuff**/
         newsView=(GridViewWithHeaderAndFooter)findViewById(R.id.newsView);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -78,18 +79,18 @@ public class av extends AppCompatActivity {
         newsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                new ShareDialogViewer().ShowShareDialog(context);
+                new ShareDialogViewer().ShowShareDialog(FavoritesActivity.this,context,Main.FavAdapterArray.get(position).getNewsLink(),Main.FavAdapterArray.get(position).getTitle(),"shared Via Science & Tech News","#S&T");
                 return (true);
             }
         });
     }
 
-    public void BookMarkHandler(){
-        Toast.makeText(context,"clik",Toast.LENGTH_LONG).show();
-    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        finish();
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finish();
+            return(true);
+        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -99,7 +100,7 @@ public class av extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_fav, menu);
         return true;
     }
-
+    View viewGroup;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -108,6 +109,9 @@ public class av extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_brightness:
                 return (new BrightnessHandler().BrightnessHandler(context, this));
+            case R.id.settings:
+                Snackbar snackbar = Snackbar.make(viewGroup, "Settings coming soon!!", Snackbar.LENGTH_LONG);
+                snackbar.show();
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
